@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Account_Manager</string>
+
+    <string-array name="choix_menu">
+        <item>Choisir  une action</item>
+        <item>Ajouter une transaction</item>
+        <item>Historique</item>
+        <item>Dépenses fixes</item>
+    </string-array>
 </resources>
