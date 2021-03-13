@@ -2,9 +2,17 @@
     <string name="app_name">Account_Manager</string>
 
     <string-array name="choix_menu">
-        <item>Choisir  une action</item>
+        <item>Choisir une action</item>
         <item>Ajouter une transaction</item>
         <item>Historique</item>
         <item>Dépenses fixes</item>
+    </string-array>
+    <string-array name="menu_depenses_fixes">
+        <item>Choisir une action</item>
+        <item>Toutes les dépenses fixes</item>
+        <item>Annuelles</item>
+        <item>Mensuelles</item>
+        <item>Hebdomadaires</item>
+        <item>Journalières</item>
     </string-array>
 </resources>
