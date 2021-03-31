@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Account_Manager</string>
+    <string name="add">Ajouter</string>
+    <string name="annee">Annee</string>
+    <string name="mois">Mois</string>
+    <string name="jour">Jour</string>
+    <string name='montant'>Montant</string>
+    <string name="raison">Raison</string>
 
     <string-array name="choix_menu">
         <item>Choisir une action</item>
@@ -14,5 +20,27 @@
         <item>Mensuelles</item>
         <item>Hebdomadaires</item>
         <item>Journalières</item>
+    </string-array>
+    <string-array name="types_depenses_fixes">
+        <item>Choisir un type de transaction</item>
+        <item>Travail</item>
+        <item>Loisir</item>
+        <item>Sport</item>
+        <item>Logement</item>
+        <item>Nourriture</item>
+        <item>Autre</item>
+    </string-array>
+    <string-array name="frequences">
+        <item>Frequence de la transaction</item>
+        <item>Unique</item>
+        <item>Journalier</item>
+        <item>Hebdomadaire</item>
+        <item>Mensuel</item>
+        <item>Annuel</item>
+    </string-array>
+    <string-array name="depenserentree">
+        <item>Depense ou rentrée ?</item>
+        <item>Depense</item>
+        <item>Rentrée</item>
     </string-array>
 </resources>

@@ -1,5 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/buttonAjouter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDepenseRentree" />
+
+    <EditText
+        android:id="@+id/editTextNumberAnnee"
+        android:layout_width="65dp"
+        android:layout_height="43dp"
+        android:ems="10"
+        android:hint="@string/annee"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextNumberMois"
+        app:layout_constraintEnd_toStartOf="@+id/editTextNumberMois"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextNumberMois" />
+
+    <EditText
+        android:id="@+id/editTextNumberMois"
+        android:layout_width="65dp"
+        android:layout_height="43dp"
+        android:ems="10"
+        android:hint="@string/mois"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.213" />
+
+    <EditText
+        android:id="@+id/editTextNumberJour"
+        android:layout_width="65dp"
+        android:layout_height="43dp"
+        android:ems="10"
+        android:hint="@string/jour"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextNumberMois"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumberMois"
+        app:layout_constraintTop_toTopOf="@+id/editTextNumberMois" />
+
+    <EditText
+        android:id="@+id/editTextNumberMontant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/montant"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameRaison" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonNameRaison"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/raison"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumberMois" />
+
+    <Spinner
+        android:id="@+id/spinnerTypeDepense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:entries="@array/types_depenses_fixes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumberMontant" />
+
+    <Spinner
+        android:id="@+id/spinnerFrequence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:entries="@array/frequences"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerTypeDepense"
+        app:layout_constraintStart_toStartOf="@+id/spinnerTypeDepense"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTypeDepense" />
+
+    <Spinner
+        android:id="@+id/spinnerDepenseRentree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:entries="@array/depenserentree"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerFrequence"
+        app:layout_constraintStart_toStartOf="@+id/spinnerFrequence"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerFrequence" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

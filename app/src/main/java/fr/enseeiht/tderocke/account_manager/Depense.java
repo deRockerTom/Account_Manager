@@ -2,20 +2,21 @@ package fr.enseeiht.tderocke.account_manager;
 
 public class Depense {
 
-    public static final int UNE_FOIS = 200;
-    public static final int JOURNALIER = 201;
-    public static final int HEBDOMADAIRE = 202;
-    public static final int MENSUEL = 203;
-    public static final int ANNUEL = 204;
+    public static final String UNE_FOIS = "UNE_FOIS";
+    public static final String JOURNALIER = "JOURNALIER";
+    public static final String HEBDOMADAIRE = "HEBDOMADAIRE";
+    public static final String MENSUEL = "MENSUEL";
+    public static final String ANNUEL = "ANNUEL";
 
     private int id;
     private String Nom;
     private String Type;
-    private int Date;
-    private int frequency;
+    private String Date;
+    private String frequency;
     private float value;
 
-    public Depense(int id, String nom, String type, int date, int frequency, float value) {
+
+    public Depense(int id, String nom, String type, String date, String frequency, float value) {
         this.id = id;
         Nom = nom;
         Type = type;
@@ -62,19 +63,19 @@ public class Depense {
         Type = type;
     }
 
-    public int getDate() {
+    public String getDate() {
         return Date;
     }
 
-    public void setDate(int date) {
+    public void setDate(String date) {
         Date = date;
     }
 
-    public int getFrequency() {
+    public String getFrequency() {
         return frequency;
     }
 
-    public void setFrequency(int frequency) {
+    public void setFrequency(String frequency) {
         this.frequency = frequency;
     }
 

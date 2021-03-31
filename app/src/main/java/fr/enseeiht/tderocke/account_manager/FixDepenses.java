@@ -1,6 +1,8 @@
 package fr.enseeiht.tderocke.account_manager;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +14,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class FixDepenses extends Activity  implements AdapterView.OnItemSelectedListener {
+public class FixDepenses extends Activity  implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
 
     private Spinner spinner;
     private ListView listView;
@@ -34,6 +36,8 @@ public class FixDepenses extends Activity  implements AdapterView.OnItemSelected
         listView = (ListView) findViewById(R.id.list_view);
 
         spinner.setOnItemSelectedListener(this);
+
+        listView.setOnItemClickListener(this);
 
 
 
@@ -108,5 +112,52 @@ public class FixDepenses extends Activity  implements AdapterView.OnItemSelected
     private void ShowAnnuallyDepensesOnListView(DataBaseHelper dataBaseHelper2) {
         depensesArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, dataBaseHelper2.getAnnually());
         listView.setAdapter((depensesArrayAdapter));
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Depense depense = (Depense) parent.getItemAtPosition(position);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle("Confirmation de suppression");
+        builder.setMessage("Êtes-vous sûrs de vouloir supprimer le virement " + depense.getFrequency() + " " + depense.getNom() + " de " + String.valueOf(depense.getValue()) + " € ?");
+        builder.setPositiveButton("Confirmer",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dataBaseHelper.deleteOneFix(depense);
+                        switch (spinner.getSelectedItemPosition()) {
+                            case 1:
+                                ShowDepensesOnListView(dataBaseHelper);
+                                Toast.makeText(FixDepenses.this, "All Fixes", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 2:
+                                ShowAnnuallyDepensesOnListView(dataBaseHelper);
+                                Toast.makeText(FixDepenses.this, "Annually", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 3:
+                                ShowMonthlyDepensesOnListView(dataBaseHelper);
+                                Toast.makeText(FixDepenses.this, "Monthly", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 4:
+                                ShowWeeklyDepensesOnListView(dataBaseHelper);
+                                Toast.makeText(FixDepenses.this, "Weekly", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 5:
+                                ShowDailyDepensesOnListView(dataBaseHelper);
+                                Toast.makeText(FixDepenses.this, "Daily", Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+                        }
+                    }
+                });
+        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
