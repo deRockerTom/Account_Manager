@@ -14,6 +14,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class FixDepenses extends Activity  implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
 
     private Spinner spinner;
@@ -92,6 +94,7 @@ public class FixDepenses extends Activity  implements AdapterView.OnItemSelected
     private void ShowDepensesOnListView(DataBaseHelper dataBaseHelper2) {
         depensesArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, dataBaseHelper2.getFix());
         listView.setAdapter((depensesArrayAdapter));
+
     }
 
     private void ShowDailyDepensesOnListView(DataBaseHelper dataBaseHelper2) {
@@ -116,7 +119,7 @@ public class FixDepenses extends Activity  implements AdapterView.OnItemSelected
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Depense depense = (Depense) parent.getItemAtPosition(position);
+        DepenseAffichee depense = (DepenseAffichee) parent.getItemAtPosition(position);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle("Confirmation de suppression");
@@ -125,7 +128,7 @@ public class FixDepenses extends Activity  implements AdapterView.OnItemSelected
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dataBaseHelper.deleteOneFix(depense);
+                        dataBaseHelper.deleteOneFix(depense.getId());
                         switch (spinner.getSelectedItemPosition()) {
                             case 1:
                                 ShowDepensesOnListView(dataBaseHelper);

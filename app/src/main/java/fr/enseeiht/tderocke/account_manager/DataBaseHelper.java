@@ -84,6 +84,35 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return cursor.moveToFirst();
     }
 
+    public Depense getDepense(Integer id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String queryString = "SELECT * FROM " + CUSTOMER_TABLE + " WHERE " + COLUMN_ID + " = " + id;
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        int depenseID = cursor.getInt(0);
+        String depenseType = cursor.getString(1);
+        String depenseName = cursor.getString(2);
+        String depenseDate = cursor.getString(3);
+        String depenseFrequency = cursor.getString(4);
+        float depenseValue = cursor.getFloat(5);
+
+        Depense depenseCherchee = new Depense(depenseID, depenseName, depenseType, depenseDate, depenseFrequency, depenseValue);
+        cursor.close();
+        db.close();
+
+        return depenseCherchee;
+    }
+
+    public boolean deleteOne(Integer id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String queryString = "DELETE FROM " + CUSTOMER_TABLE + " WHERE " + COLUMN_ID + " = " + id;
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        return cursor.moveToFirst();
+    }
+
     public boolean deleteOneFix(Depense depense) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -94,8 +123,37 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return cursor.moveToFirst();
     }
 
-    public List<Depense> getEveryone() {
-        List<Depense> returnList = new ArrayList<>();
+    public Depense getDepenseFix(Integer id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String queryString = "SELECT * FROM " + FIX_TABLE + " WHERE " + COLUMN_ID + " = " + id;
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        int depenseID = cursor.getInt(0);
+        String depenseType = cursor.getString(1);
+        String depenseName = cursor.getString(2);
+        String depenseDate = cursor.getString(3);
+        String depenseFrequency = cursor.getString(4);
+        float depenseValue = cursor.getFloat(5);
+
+        Depense depenseCherchee = new Depense(depenseID, depenseName, depenseType, depenseDate, depenseFrequency, depenseValue);
+        cursor.close();
+        db.close();
+
+        return depenseCherchee;
+    }
+
+    public boolean deleteOneFix(Integer id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String queryString = "DELETE FROM " + FIX_TABLE + " WHERE " + COLUMN_ID + " = " + id;
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        return cursor.moveToFirst();
+    }
+
+    public ArrayList<DepenseAffichee> getEveryone() {
+        ArrayList<DepenseAffichee> returnList = new ArrayList<>();
 
         String queryString = "SELECT * FROM " + CUSTOMER_TABLE + " ORDER BY ACTION_DATE desc";
 
@@ -113,7 +171,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 String depenseFrequency = cursor.getString(4);
                 float depenseValue = cursor.getFloat(5);
 
-                Depense newDepense = new Depense(depenseID, depenseName, depenseType, depenseDate, depenseFrequency, depenseValue);
+                DepenseAffichee newDepense = new DepenseAffichee(depenseID, depenseName, depenseDate, depenseFrequency, depenseValue);
                 returnList.add(newDepense);
 
             } while(cursor.moveToNext());
@@ -127,8 +185,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-    public List<Depense> getDaily() {
-        List<Depense> returnList = new ArrayList<>();
+    public ArrayList<DepenseAffichee> getDaily() {
+        ArrayList<DepenseAffichee> returnList = new ArrayList<>();
 
         String queryString = "SELECT * FROM " + FIX_TABLE + " WHERE " + COLUMN_ACTION_FREQUENCY + " = \"Journalier\"" + "ORDER BY ACTION_DATE desc";
 
@@ -146,7 +204,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 String depenseFrequency = cursor.getString(4);
                 float depenseValue = cursor.getFloat(5);
 
-                Depense newDepense = new Depense(depenseID, depenseName, depenseType, depenseDate, depenseFrequency, depenseValue);
+                DepenseAffichee newDepense = new DepenseAffichee(depenseID, depenseName, depenseDate, depenseFrequency, depenseValue);
                 returnList.add(newDepense);
 
             } while(cursor.moveToNext());
@@ -160,8 +218,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-    public List<Depense> getWeekly() {
-        List<Depense> returnList = new ArrayList<>();
+    public ArrayList<DepenseAffichee> getWeekly() {
+        ArrayList<DepenseAffichee> returnList = new ArrayList<>();
 
         String queryString = "SELECT * FROM " + FIX_TABLE + " WHERE " + COLUMN_ACTION_FREQUENCY + " = \"Hebdomadaire\"" + "ORDER BY ACTION_DATE desc";
 
@@ -179,7 +237,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 String depenseFrequency = cursor.getString(4);
                 float depenseValue = cursor.getFloat(5);
 
-                Depense newDepense = new Depense(depenseID, depenseName, depenseType, depenseDate, depenseFrequency, depenseValue);
+                DepenseAffichee newDepense = new DepenseAffichee(depenseID, depenseName, depenseDate, depenseFrequency, depenseValue);
                 returnList.add(newDepense);
 
             } while(cursor.moveToNext());
@@ -193,8 +251,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-    public List<Depense> getMonthly() {
-        List<Depense> returnList = new ArrayList<>();
+    public ArrayList<DepenseAffichee> getMonthly() {
+        ArrayList<DepenseAffichee> returnList = new ArrayList<>();
 
         String queryString = "SELECT * FROM " + FIX_TABLE + " WHERE " + COLUMN_ACTION_FREQUENCY + " = \"Mensuel\"" + "ORDER BY ACTION_DATE desc";
 
@@ -212,7 +270,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 String depenseFrequency = cursor.getString(4);
                 float depenseValue = cursor.getFloat(5);
 
-                Depense newDepense = new Depense(depenseID, depenseName, depenseType, depenseDate, depenseFrequency, depenseValue);
+                DepenseAffichee newDepense = new DepenseAffichee(depenseID, depenseName, depenseDate, depenseFrequency, depenseValue);
                 returnList.add(newDepense);
 
             } while(cursor.moveToNext());
@@ -226,8 +284,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-    public List<Depense> getAnnually() {
-        List<Depense> returnList = new ArrayList<>();
+    public ArrayList<DepenseAffichee> getAnnually() {
+        ArrayList<DepenseAffichee> returnList = new ArrayList<>();
 
         String queryString = "SELECT * FROM " + FIX_TABLE + " WHERE " + COLUMN_ACTION_FREQUENCY + " = \"Annuel\"" + "ORDER BY ACTION_DATE desc";
 
@@ -245,7 +303,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 String depenseFrequency = cursor.getString(4);
                 float depenseValue = cursor.getFloat(5);
 
-                Depense newDepense = new Depense(depenseID, depenseName, depenseType, depenseDate, depenseFrequency, depenseValue);
+                DepenseAffichee newDepense = new DepenseAffichee(depenseID, depenseName, depenseDate, depenseFrequency, depenseValue);
                 returnList.add(newDepense);
 
             } while(cursor.moveToNext());
@@ -259,8 +317,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-    public List<Depense> getFix() {
-        List<Depense> returnList = new ArrayList<>();
+    public ArrayList<DepenseAffichee> getFix() {
+        ArrayList<DepenseAffichee> returnList = new ArrayList<>();
 
         String queryString = "SELECT * FROM " + FIX_TABLE + " WHERE (" + COLUMN_ACTION_FREQUENCY + " = \"Annuel\"" + " OR " +
                 COLUMN_ACTION_FREQUENCY + " = \"Mensuel\"" + " OR " + COLUMN_ACTION_FREQUENCY + " = \"Hebdomadaire\"" +
@@ -280,7 +338,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 String depenseFrequency = cursor.getString(4);
                 float depenseValue = cursor.getFloat(5);
 
-                Depense newDepense = new Depense(depenseID, depenseName, depenseType, depenseDate, depenseFrequency, depenseValue);
+                DepenseAffichee newDepense = new DepenseAffichee(depenseID, depenseName, depenseDate, depenseFrequency, depenseValue);
                 returnList.add(newDepense);
 
             } while(cursor.moveToNext());
